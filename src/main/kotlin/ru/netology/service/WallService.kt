@@ -2,11 +2,18 @@ package ru.netology.service
 
 import ru.netology.domain.Post
 
-object WallService {
+class WallService {
     var posts = emptyArray<Post>()
 
-    fun add(post: Post) : Post {
-        posts += post
+    fun add(newPost: Post): Post {
+        var flag = true
+        for ((index, value) in posts.withIndex()) {
+            if (newPost.id == posts[index].id)
+                flag = false
+        }
+        if (flag) {
+            posts += newPost
+        }
         return posts.last()
     }
 
